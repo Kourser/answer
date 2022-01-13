@@ -1,6 +1,6 @@
 const path = require('path');
 
-const createExport = (input, output) => {
+const createExport = (input, output, dev) => {
     return {
         entry: input,
         resolve: {
@@ -24,13 +24,16 @@ const createExport = (input, output) => {
         },
         output: {
             filename: output,
-            path: path.resolve(__dirname, 'dist'),
+            path: path.resolve(__dirname, !dev ? "build" : 'dist'),
         },
         target: "web"
     }
 }
 
-module.exports = [
-    createExport('./src/index.ts', 'index.js'),
-    createExport('./src/index.edpuzzle.ts', 'edpuzzle.user.js')
-];
+module.exports = (config) => {
+
+    return [
+        createExport('./src/index.ts', 'index.js', config.dev),
+        createExport('./src/index.edpuzzle.ts', 'edpuzzle.user.js', config.dev)
+    ]
+};

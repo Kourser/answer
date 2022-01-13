@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
-    "dev": "webpack --mode development --watch",
-    "build": "webpack"
+    "dev": "webpack --mode development --watch --env=dev",
+    "build": "webpack --env=prod"
   },
   "repository": {
     "type": "git",
